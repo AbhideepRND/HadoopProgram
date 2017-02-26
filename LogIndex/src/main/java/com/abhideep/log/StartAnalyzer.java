@@ -15,12 +15,12 @@ public class StartAnalyzer {
 
 	public static void main(String[] args) throws CorruptIndexException, LockObtainFailedException, IOException, ParseException {
 		
-		final LoggerIndexer loggerIndexer = new LoggerIndexer("D://data//log");
-		final ReadLoggerFile readLoggerFile = new ReadLoggerFile(new File("D://data//server_log.log"));
+		final LoggerIndexer loggerIndexer = new LoggerIndexer("/home/liveyoung/Downloads/Log File/log");
+		final ReadLoggerFile readLoggerFile = new ReadLoggerFile(new File("/home/liveyoung/Downloads/Log File/access_log/access_log"));
 		readLoggerFile.readLoggerData(loggerIndexer);
 		loggerIndexer.close();
-		SearchLogger searchLogger = new SearchLogger("D://data//log");
-		searchLogger.search("com.clearstream.portal.idm.filter.LoginFilter");
+		SearchLogger searchLogger = new SearchLogger("/home/liveyoung/Downloads/Log File/log");
+		searchLogger.search("64.242.88.10");
 		
 	}
 }

@@ -25,7 +25,7 @@ public class SearchLogger {
 		if(indexSearcher == null){
 			this.indexSearcher = new IndexSearcher(FSDirectory.open(new File(indexDir))); 
 			StandardAnalyzer standardAnalyzer = new StandardAnalyzer(Version.LUCENE_36);
-			queryParser = new QueryParser(Version.LUCENE_36, "Class", standardAnalyzer);
+			queryParser = new QueryParser(Version.LUCENE_36, "Date", standardAnalyzer);
 		}
 
 	}
@@ -34,7 +34,6 @@ public class SearchLogger {
 		Query query = queryParser.parse(queryString);
 		 int totalHits = indexSearcher.search(query,10).totalHits;
 		 TopDocs search = indexSearcher.search(query, 10);
-		 search.
 		 System.out.println(totalHits);
 		/*scoreDocs.
 		if(scoreDocs.length>0){
