@@ -2,7 +2,14 @@ package com.hadoop.experiment.hdfsreadwrite;
 
 import java.io.Console;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.util.ToolRunner;
+
+import com.hadoop.experiment.mapreduce.ReduceLogFile;
 
 public class FileController {
 
@@ -37,15 +44,27 @@ public class FileController {
 						new DeleteFilesToHDFS().deleteFormHDFS(deleteLocation.trim());
 						break;
 						
-			case 3: System.out.println("Fuck You");
-					break;
+			case 3: 	String[] logArgs = new String[2];
+						System.out.println("Please provide the input file location");
+						logArgs[0] = console.readLine();
+						System.out.println("Please provide the out file location");
+						logArgs[1] = console.readLine();
+												
+						//logArgs[0] = "/InputFiles/Log/access_log";
+						//logArgs[1] = "/OutputFiles/Log";
+						
+						final int run = new ReduceLogFile().run(logArgs);
+						if( run ==1){
+								System.out.println("Reduce of file is complete");
+						}
+						break;
 					
 			case 4: System.exit(0);
 				}
 			} catch (IOException e){
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			} catch(Exception e){
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 			
 			}

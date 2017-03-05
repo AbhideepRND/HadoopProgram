@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,7 +72,7 @@ public class ReadLoggerFile {
 		
 	}
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 		
 		/*String log = "2016-10-03 00:03:03,388 ERROR  [com.clearstream.gaf.ui.jsf.exception.ErrorExceptionHandler] (http-executor-threads - 481) Exception from JSF: ";
 		String DATE = "2016";
@@ -89,12 +91,26 @@ public class ReadLoggerFile {
 		Pattern compile = Pattern.compile("(.*?) (- -) (\\[\\d{2}/\\w{3}/\\d{4}:\\d{2}:\\d{2}:\\d{2} -\\d{4}\\]) (\".*?\") (\\d{3}) (\\d{1,10})");
 		Matcher matcher = compile.matcher(s);
 		System.out.println(matcher.matches());
-		
+	
 		/*
 		Pattern pattern = Pattern.compile(date_reg);
 		Matcher matcher = pattern.matcher(log);
 		
 		System.out.println(matcher.matches());*/
+		
+		Pattern compile2 = Pattern.compile("(\\[)(\\d{2}/\\w{3}/\\d{4})(:\\d{2}:\\d{2}:\\d{2}) (-\\d{4}\\])");
+		
+		
+		
+		String date = "[07/Mar/2004:16:05:49 -0800]";
+		Matcher matcher2 = compile2.matcher(matcher.group(3));
+		
+		System.out.println(matcher2.matches());
+		System.out.println(matcher2.group(2));
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy");
+		
+		System.out.println(simpleDateFormat.parse(matcher2.group(2)));
 		
 		
 		System.out.println(matcher.group(1));
