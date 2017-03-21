@@ -2,14 +2,10 @@ package com.hadoop.experiment.hdfsreadwrite;
 
 import java.io.Console;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.util.ToolRunner;
-
 import com.hadoop.experiment.mapreduce.ReduceLogFile;
+import com.hadoop.experiment.mapreducecompositekey.ReduceLogConfig;
 
 public class FileController {
 
@@ -23,7 +19,8 @@ public class FileController {
 			System.out.println("1. For Add file to HDFS ");
 			System.out.println("2. For Delete file to HDFS ");
 			System.out.println("3. Apply MapReduce ");
-			System.out.println("4. Exit ");
+			System.out.println("4. Apply MapReduce By Group ");
+			System.out.println("5. Exit ");
 			try{
 			switch (scanner.nextInt()) {
 			case 1:
@@ -58,8 +55,22 @@ public class FileController {
 								System.out.println("Reduce of file is complete");
 						}
 						break;
+			case 4: 	String[] logArgs2 = new String[2];
+						/*System.out.println("Please provide the input file location");
+						logArgs2[0] = console.readLine();
+						System.out.println("Please provide the out file location");
+						logArgs2[1] = console.readLine();*/
+												
+						logArgs2[0] = "/InputFiles/Log/access_log";
+						logArgs2[1] = "/OutputFiles/Log";
+						
+						final int run2 = new ReduceLogConfig().run(logArgs2);
+						if( run2 ==1){
+								System.out.println("Reduce of file is complete");
+						}
+						break;
 					
-			case 4: System.exit(0);
+			case 5: System.exit(0);
 				}
 			} catch (IOException e){
 				e.printStackTrace();

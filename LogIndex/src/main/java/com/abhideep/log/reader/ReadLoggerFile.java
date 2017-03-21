@@ -102,15 +102,15 @@ public class ReadLoggerFile {
 		
 		
 		
-		String date = "[07/Mar/2004:16:05:49 -0800]";
+		/*String date = "[07/Mar/2004:16:05:49 -0800]";
 		Matcher matcher2 = compile2.matcher(matcher.group(3));
 		
 		System.out.println(matcher2.matches());
 		System.out.println(matcher2.group(2));
+		*/
+		/*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy");
 		
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy");
-		
-		System.out.println(simpleDateFormat.parse(matcher2.group(2)));
+		System.out.println(simpleDateFormat.parse(matcher2.group(2)));*/
 		
 		
 		System.out.println(matcher.group(1));
