@@ -1,0 +1,38 @@
+create table ConsumerComp(
+receiveDate string,
+complainGroup  string,
+subComplainGroup  string,
+issue  string,
+subIssue  string,
+complainNaration  string,
+companyPublicResponse  string,
+company  string,
+state  string,
+zipCode  string,
+tags  string,
+consumerConsent  string,
+complainRegisterVia  string,
+companySendDate  string,
+companyResponse  string,
+timelyresponse  string,
+consumerDispute  string,
+complainId string)
+ROW FORMAT SerDe 'com.hadoop.experiment.seqfile.ConsumerComplainSerDe'
+STORED AS SEQUENCEFILE;
+
+load data inpath '/InputFiles/Log/Consumer_Complaints.seqfile' into table ConsumerComp;
+select * from ConsumerComp;
+
+export CLASSPATH=$CLASSPATH:/home/liveyoung/HadoopWorkspace/hadoopexp/HDFSReaderWriter/target/*:
+
+Errors 
+During the create the table I found an error 
+    return code 1 from org.apache.hadoop.hive.ql.exec.DDLTask. Cannot validate serde: com.hadoop.experiment.seqfile.ConsumerComplainSerDe
+    
+    The error is happen due to Typo
+        Previously I am writing the Row format in 'ROW FORMAT SERDE' that's why it didn't work
+        Now I change the SERDE -> SerDe it works.
+        
+To find the location of log in hive we need to check the hive-default.xml file 
+    hive.exec.log4j.file and you need to check the log.properties in conf folder
+

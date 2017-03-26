@@ -1,0 +1,40 @@
+2017-03-24 12:06:14,312 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: Diagnostics report from attempt_1490337150260_0002_m_000000_3: Container [pid=13211,containerID=container_1490337150260_0002_01_000005] is running beyond virtual memory limits. Current usage: 121.4 MB of 1 GB physical memory used; 4.7 GB of 2.1 GB virtual memory used. Killing container.
+Dump of the process-tree for container_1490337150260_0002_01_000005 :
+	|- PID PPID PGRPID SESSID CMD_NAME USER_MODE_TIME(MILLIS) SYSTEM_TIME(MILLIS) VMEM_USAGE(BYTES) RSSMEM_USAGE(PAGES) FULL_CMD_LINE
+	|- 13211 13209 13211 13211 (bash) 0 0 12861440 742 /bin/bash -c /home/liveyoung/ProgramFiles/jdk1.8.0_121/bin/java -Djava.net.preferIPv4Stack=true -Dhadoop.metrics.log.level=WARN  -Xmx3072m -Djava.io.tmpdir=/tmp/hadoop-liveyoung/nm-local-dir/usercache/liveyoung/appcache/application_1490337150260_0002/container_1490337150260_0002_01_000005/tmp -Dlog4j.configuration=container-log4j.properties -Dyarn.app.container.log.dir=/home/liveyoung/ProgramFiles/hadoop-2.6.2/logs/userlogs/application_1490337150260_0002/container_1490337150260_0002_01_000005 -Dyarn.app.container.log.filesize=0 -Dhadoop.root.logger=INFO,CLA org.apache.hadoop.mapred.YarnChild 127.0.1.1 40846 attempt_1490337150260_0002_m_000000_3 5 1>/home/liveyoung/ProgramFiles/hadoop-2.6.2/logs/userlogs/application_1490337150260_0002/container_1490337150260_0002_01_000005/stdout 2>/home/liveyoung/ProgramFiles/hadoop-2.6.2/logs/userlogs/application_1490337150260_0002/container_1490337150260_0002_01_000005/stderr  
+	|- 13215 13211 13211 13211 (java) 332 8 4998246400 30331 /home/liveyoung/ProgramFiles/jdk1.8.0_121/bin/java -Djava.net.preferIPv4Stack=true -Dhadoop.metrics.log.level=WARN -Xmx3072m -Djava.io.tmpdir=/tmp/hadoop-liveyoung/nm-local-dir/usercache/liveyoung/appcache/application_1490337150260_0002/container_1490337150260_0002_01_000005/tmp -Dlog4j.configuration=container-log4j.properties -Dyarn.app.container.log.dir=/home/liveyoung/ProgramFiles/hadoop-2.6.2/logs/userlogs/application_1490337150260_0002/container_1490337150260_0002_01_000005 -Dyarn.app.container.log.filesize=0 -Dhadoop.root.logger=INFO,CLA org.apache.hadoop.mapred.YarnChild 127.0.1.1 40846 attempt_1490337150260_0002_m_000000_3 5 
+
+Container killed on request. Exit code is 143
+Container exited with a non-zero exit code 143
+
+
+The above error occur due to YARN java heap space memory error?
+So to solve the error I increase the Heap Size of Yarn and and Specifies the size of Mapper and Reducer in follwoing xml files.
+Mapred-site.xml
+      <property>
+        <name>mapred.child.java.opts</name>
+        <value>-Xmx1024m</value>
+      </property>
+      <property>
+        <name>mapreduce.map.java.opts</name>
+        <value>-Xmx3072m</value>
+      </property>
+      <property>
+        <name>mapreduce.reduce.java.opts</name>
+        <value>-Xmx6144m</value>
+      </property>
+
+Yarn-site.xml
+    <property>
+        <name>yarn.nodemanager.vmem-check-enabled</name>
+        <value>false</value>
+        <description>Whether virtual memory limits will be enforced for containers</description>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.vmem-pmem-ratio</name>
+        <value>4</value>
+        <description>Ratio between virtual memory to physical memory when setting memory limits for containers</description>
+    </property>
+
+
