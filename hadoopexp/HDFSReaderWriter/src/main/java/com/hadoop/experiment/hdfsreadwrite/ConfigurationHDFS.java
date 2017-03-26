@@ -8,12 +8,20 @@ import org.apache.hadoop.fs.Path;
 
 public class ConfigurationHDFS {
 
-	protected FileSystem getFileSystem() throws IOException{
-		final Configuration configuration = new Configuration();
+	final private static Configuration configuration ;
+	static {
+		configuration = new Configuration();
 		configuration.addResource(new Path("/home/hitman/ProgramFiles/hadoop-2.6.2/etc/hadoop/core-site.xml"));
 		configuration.addResource(new Path("/home/hitman/ProgramFiles/hadoop-2.6.2/etc/hadoop/hdfs-site.xml"));
-		final FileSystem fileSystem = FileSystem.get(configuration);
-		return fileSystem;
 	}
+	
+	public static  FileSystem getFileSystem() throws IOException{
+		return FileSystem.get(configuration);
+	}
+	
+	public static Configuration getConfiguration() throws IOException{
+		return configuration;
+	}
+	
 	
 }

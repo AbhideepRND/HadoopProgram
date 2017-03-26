@@ -4,8 +4,14 @@ import java.io.Console;
 import java.io.IOException;
 import java.util.Scanner;
 
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.util.ToolRunner;
+
 import com.hadoop.experiment.mapreduce.ReduceLogFile;
 import com.hadoop.experiment.mapreducecompositekey.ReduceLogConfig;
+import com.hadoop.experiment.seqfile.ConsumerComplainMapReduce;
+import com.hadoop.experiment.seqfile.ConsumerComplainSequenceFileReader;
+import com.hadoop.experiment.seqfile.ConsumerComplainSequenceFileWriter;
 
 public class FileController {
 
@@ -20,7 +26,10 @@ public class FileController {
 			System.out.println("2. For Delete file to HDFS ");
 			System.out.println("3. Apply MapReduce ");
 			System.out.println("4. Apply MapReduce By Group ");
-			System.out.println("5. Exit ");
+			System.out.println("5. Sequence file writer in HDFS");
+			System.out.println("6. Sequence file reader");
+			System.out.println("7. Run reduce job over sequence file");
+			System.out.println("20. Exit ");
 			try{
 			switch (scanner.nextInt()) {
 			case 1:
@@ -69,8 +78,40 @@ public class FileController {
 								System.out.println("Reduce of file is complete");
 						}
 						break;
+						
+			case 5: 	String[] sequenceData = new String[2];
+						System.out.println("Please provide the input file location in local directory");
+						sequenceData[0] = console.readLine();
+						System.out.println("Please provide the output file location in HDFS");
+						sequenceData[1] = console.readLine();
+												
+						new ConsumerComplainSequenceFileWriter().writeSequenceFile(sequenceData);
+								System.out.println("Reduce of file is complete");
+						break;
+			case 6: 	String[] sequenceData2 = new String[2];
+						System.out.println("Please provide the output file location in HDFS");
+						sequenceData2[0] = console.readLine();
+												
+						new ConsumerComplainSequenceFileReader().readSequenceData(sequenceData2);
+								System.out.println("Reduce of file is complete");
+						break;
+						
+			case 7: 	String[] sequenceData3 = new String[2];
+						System.out.println("Please provide the input file location in HDFS");
+						sequenceData3[0] = console.readLine();
+						System.out.println("Please provide the output file location in HDFS");
+						sequenceData3[1] = console.readLine();
+												
+						final int run3 =  new ConsumerComplainMapReduce().run(sequenceData3);
+						if(run3 == 0){
+							System.out.println("Reduce of file is complete");
+						} else{
+							System.out.println("Reduce Job is failed");
+						}
+								
+						break;
 					
-			case 5: System.exit(0);
+			case 20: System.exit(0);
 				}
 			} catch (IOException e){
 				e.printStackTrace();
