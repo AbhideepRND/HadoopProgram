@@ -4,8 +4,8 @@ import org.springframework.messaging.Message;
 
 public class ConvertMessageToObject {
 
-	public Object convert(Object message){
-		
-		return "hello";
+	public PersonTo convert(Message message){
+		final PersonTo personTo = new PersonTo();
+		return personTo;
 	}
 }

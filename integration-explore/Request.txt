@@ -1,0 +1,6 @@
+http://localhost:8080/services/order
+	{
+	"personName":"Abhideep",
+	"personAge":25,
+	"addresss":"garifa"
+	}

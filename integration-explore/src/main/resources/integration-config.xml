@@ -22,16 +22,22 @@
                               request-channel="orderRequestChannel"
                               reply-channel="orderResponseChannel"
                               
-                              path="/services/order"
+                              path="/services/order/{clientid}"
                               reply-timeout="50000">
+	      <int-http:header name="clientid" expression="#pathVariables.clientid"/>
+	      <int-http:header name="include" expression="#requestParams[include]"/>
     </int-http:inbound-gateway>
-    <int:json-to-object-transformer id="jsonResuestToPersonTo" input-channel="orderRequestChannel" output-channel="orderResponseChannel"
-    											 type="com.springframework.integration.explore.firstscenario.PersonTo"/>
+    <!-- <int:json-to-object-transformer id="jsonResuestToPersonTo" input-channel="orderRequestChannel" output-channel="orderResponseChannel"
+    											 type="com.springframework.integration.explore.firstscenario.PersonTo">
+    											 </int:json-to-object-transformer> -->
+    <int:service-activator id="jsontoobject" input-channel="orderRequestChannel" output-channel="orderResponseChannel" >
+    	<bean class="com.springframework.integration.explore.firstscenario.ConvertMessageToObject" id="messageconverter"></bean>
+    
+    </int:service-activator>										 
     											 
 	<int:service-activator id="processData" ref="ProcessRestRequest" method="process" input-channel="orderResponseChannel" 
 											output-channel="outputChannel" requires-reply="true"
                                				send-timeout="60000" />
     
-	
 	<bean id="ProcessRestRequest" class="com.springframework.integration.explore.firstscenario.ProcessRestRequest" />
 </beans>
