@@ -10,13 +10,20 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-public class ApplicationContext {
+@ComponentScan(basePackages={"org.security.spring.exp"})
+@PropertySource("classpath:application.properties")
+public class ApplicationContext extends WebMvcConfigurerAdapter {
 
 	@Value("${db.driver}")
 	private String dbDriverName;
@@ -52,4 +59,20 @@ public class ApplicationContext {
 		properties.load(fileInputStream);
 		return properties;
 	}
+	
+	@Bean(name = "viewResolver")
+    public InternalResourceViewResolver getViewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("WEB-INF	/");
+        viewResolver.setSuffix(".jsp");
+        return viewResolver;
+    }
+	
+	@Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
+	
+	
+	
 }

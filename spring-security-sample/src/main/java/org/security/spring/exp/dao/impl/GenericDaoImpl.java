@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 
-public abstract class GenericDaoImpl<BO extends BoTemplate> implements GenericDao<BO> {
+public abstract class GenericDaoImpl<BO extends BoTemplate> extends GenericDao<BO> {
 
 	@Autowired
 	private DataSource dataSource;
@@ -27,7 +27,7 @@ public abstract class GenericDaoImpl<BO extends BoTemplate> implements GenericDa
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
 	@Override
-	public List<BO> search(NativeSqlQueryName queryNames, SqlParameterSource sqlparameter, RowMapper<BO> rowmapper) {
+	protected List<BO> search(NativeSqlQueryName queryNames, SqlParameterSource sqlparameter, RowMapper<BO> rowmapper) {
 		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 		final String serachQuery = (String)properties.get(queryNames.getPropertyName());
 		final List<BO> query = this.namedParameterJdbcTemplate.query(serachQuery, sqlparameter, rowmapper);
@@ -35,5 +35,7 @@ public abstract class GenericDaoImpl<BO extends BoTemplate> implements GenericDa
 	}
 	
 	public abstract List<BO> search(BO data);
+
+	
 	
 }
