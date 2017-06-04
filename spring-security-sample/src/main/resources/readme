@@ -1,5 +1,7 @@
 URLS :- 
 	https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#authorize-requests
+	https://services.teammentor.net/article/932bd2c4-fb86-4457-88f7-1ab729dae702
+	https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet
 	https://stackoverflow.com/questions/28124626/what-means-this-spring-security-diagram
 	http://www.baeldung.com/spring-security-session
 	http://stackoverflow.com/questions/34658534/spring-security-switch-to-ldap-authentication-and-database-authorities
@@ -24,7 +26,7 @@ Points:-
 	1. Login with user credential and authorization.  ----  Done
 	2. Logout the user.   ----------  Done
 	3. Configure the authorization from resource file outside the project. -- Need to check.
-	4. CSRF attack prevention
+	4. CSRF attack prevention        ---- 
 	5. Session Fixation protection
 	6. EnableGlobalMethodSecurity
 	7. Password Encoding
