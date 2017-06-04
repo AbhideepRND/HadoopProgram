@@ -3,7 +3,7 @@ package org.security.spring.exp.enums;
 public enum SqlColumnConstaints {
 
 	Username("username"),
-	Password("pasword"),
+	Password("password"),
 	Role("roles");
 	private String columnName; 
 	

@@ -1,0 +1,32 @@
+URLS :- 
+	https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#authorize-requests
+	https://stackoverflow.com/questions/28124626/what-means-this-spring-security-diagram
+	http://www.baeldung.com/spring-security-session
+	http://stackoverflow.com/questions/34658534/spring-security-switch-to-ldap-authentication-and-database-authorities
+	http://www.journaldev.com/8718/spring-4-security-mvc-login-logout-example
+	http://www.journaldev.com/8748/spring-security-role-based-access-authorization-example
+	http://www.baeldung.com/spring-security-login
+	http://javainsimpleway.com/spring-security-using-custom-authentication-provider/
+	http://www.baeldung.com/spring-security-authentication-provider
+	http://stackoverflow.com/questions/34658534/spring-security-switch-to-ldap-authentication-and-database-authorities
+	http://docs.spring.io/spring-security/site/docs/4.0.3.RELEASE/reference/htmlsingle/#ldap
+	https://sdqali.in/blog/2016/06/28/injecting-dependencies-into-a-spring-configuration/
+	http://blog.netgloo.com/2014/08/17/use-mysql-database-in-a-spring-boot-web-application-through-hibernate/
+On perticular method
+	http://javabeat.net/separating-roles-and-permissions-in-spring-security/
+Spring Session management
+	https://www.infoq.com/articles/Next-Generation-Session-Management-with-Spring-Session
+Spring Web Service
+	https://spring.io/guides/tutorials/bookmarks/
+	
+
+Points:-
+	1. Login with user credential and authorization.  ----  Done
+	2. Logout the user.   ----------  Done
+	3. Configure the authorization from resource file outside the project. -- Need to check.
+	4. CSRF attack prevention
+	5. Session Fixation protection
+	6. EnableGlobalMethodSecurity
+	7. Password Encoding
+	8. AccessDeniedHandler
+	9. Auth 2.0

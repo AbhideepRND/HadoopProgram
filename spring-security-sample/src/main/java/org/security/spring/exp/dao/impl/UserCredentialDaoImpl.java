@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository(value="UserCredentialDaoImpl")
 public class UserCredentialDaoImpl extends GenericDaoImpl<UserCredential>{
 
 	
@@ -38,7 +38,7 @@ public class UserCredentialDaoImpl extends GenericDaoImpl<UserCredential>{
 				final String[] roles = result.getString(SqlColumnConstaints.Role.getColumnName()).split(";");
 				final List<Role> arrayList = new ArrayList<Role>(roles.length);
 				for(String role: roles){
-					new Role(role);
+					arrayList.add(new Role(role));
 				}
 				userCredential.setAuthorities(arrayList);
 				return userCredential;
